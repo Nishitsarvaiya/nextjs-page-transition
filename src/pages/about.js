@@ -1,15 +1,14 @@
 import Image from "next/image";
 
-const TITLE = ["PixelForge", "Studios"];
+const TITLE = ["About", "PixelForge"];
 
 const TEXT = [
-	"PixelForge Studios is a leading design studio founded in 2015 by ",
-	"tech visionaries. Specializing in top-tier website development and ",
-	"a wide range of digital services, the studio is renowned for its ",
-	"innovation and client-focused approach.",
+	"At PixelForge Studios, founded in 2015, we blend visionary design ",
+	"with cutting-edge technology, crafting digital experiences ",
+	"that redefine innovation and creativity.",
 ];
 
-export default function Home() {
+export default function About() {
 	return (
 		<main className="fixed inset-0 overflow-hidden h-screen pt-32">
 			<h1 className="text-center text-[15vw] leading-none">
