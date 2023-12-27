@@ -18,9 +18,23 @@ export const opacity = {
 	},
 };
 
+export const maskZoomOut = {
+	initial: {
+		scale: 1,
+	},
+	// enter: {
+	// 	scale: 1,
+	// 	transition: { ...transition2 },
+	// },
+	exit: {
+		scale: [1.3, 1],
+		transition: { ...transition2, times: [0, 1] },
+	},
+};
+
 export const clipDown = {
 	initial: {
-		clipPath: "inset(0% 0% 100% 0%)",
+		clipPath: "inset(100% 0% 0% 0%)",
 	},
 	enter: {
 		clipPath: "inset(0% 0% 0% 0%)",
