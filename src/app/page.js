@@ -1,9 +1,8 @@
 'use client';
 
-import Inner from '@/components/layout/Inner';
+import { anim, image, letter, line, opacity } from '@/lib/animations';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useLayoutEffect, useRef } from 'react';
-import { animateLetters, animateLines, animateImageReveal, animateOpacityIn } from '@/lib/animations';
 
 const TITLE = ['PixelForge', 'Studios'];
 
@@ -15,26 +14,16 @@ const TEXT = [
 ];
 
 export default function Home() {
-	const scopeRef = useRef(null);
-
-	useLayoutEffect(() => {
-		if (!scopeRef.current) return;
-		animateLetters(scopeRef.current);
-		animateLines(scopeRef.current);
-		animateImageReveal(scopeRef.current);
-		animateOpacityIn(scopeRef.current);
-	}, []);
-
 	return (
-		<div ref={scopeRef}>
+		<main>
 			<h1 className='text-center text-[19vw] xl:text-[15vw] leading-[1.1] tracking-tighter relative z-[1]'>
 				{TITLE.map((word) => (
 					<span key={word} className='overflow-hidden block'>
 						<span className='block'>
 							{word.split('').map((l, idx) => (
-								<span key={idx} className='inline-block js-letter'>
+								<motion.span {...anim(letter, idx)} key={idx} className='inline-block'>
 									{l}
-								</span>
+								</motion.span>
 							))}
 						</span>
 					</span>
@@ -43,14 +32,21 @@ export default function Home() {
 			<p className='max-w-lg absolute right-5 bottom-5 leading-tight hidden xl:block'>
 				{TEXT.map((item, idx) => (
 					<span className='block overflow-hidden' key={idx}>
-						<span className='block js-line'>{item}</span>
+						<motion.span className='block' {...anim(line, idx)}>
+							{item}
+						</motion.span>
 					</span>
 				))}
 			</p>
-			<div className='relative mt-10 h-[70vw] z-0 md:h-[60vh] md:top-1/2 md:w-[50vw] xl:w-[20vw] xl:left-20 md:absolute js-image'>
+			<motion.div
+				className='relative mt-10 h-[70vw] z-0 md:h-[60vh] md:top-1/2 md:w-[50vw] xl:w-[20vw] xl:left-20 md:absolute'
+				{...anim(image)}
+			>
 				<Image src='/home.jpg' alt='' fill style={{ objectFit: 'cover' }} />
-			</div>
-			<p className='mt-10 px-5 leading-normal md:hidden js-fade'>{TEXT.join('')}</p>
-		</div>
+			</motion.div>
+			<motion.p {...anim(opacity)} className='mt-10 px-5 leading-normal md:hidden'>
+				{TEXT.join('')}
+			</motion.p>
+		</main>
 	);
 }
